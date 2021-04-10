@@ -1,5 +1,5 @@
-const { apollo } = require('apollo-server')
-const gql = require('graphql-tag')
+const { ApolloServer, gql } = require('apollo-server')
+const port = process.env.PORT || 3000
 
 const typeDefs = gql`
   type Query {
@@ -13,14 +13,17 @@ const resolvers = {
   }
 }
 
-const server = new apollo({
+const server = new ApolloServer({
   typeDefs,
   resolvers
 })
 
-const port = process.env.PORT || 3000
-
+/* eslint-disable
+  no-console, promise/always-return, promise/catch-or-return
+  ----------
+  this is per the apollo-server docs, so temporarily disabling
+*/
 server.listen({ port })
-  .then(res => {
-    console.log(`server running @ ${res.url}`)
+  .then(({ url }) => {
+    console.log(`🚀 server running @ ${url}`)
   })
