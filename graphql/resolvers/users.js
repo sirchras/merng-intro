@@ -8,11 +8,6 @@ const { validateRegisterInput } = require('../../utils/validators')
 module.exports = {
   mutations: {
     register: async (_, args, context, info) => {
-      /* todo:
-      - validate user data
-      - make sure user doesn't exist
-      */
-
       const JWT_SECRET = process.env.JWT_SECRET
       const { username, email, password, confirmPass } = args.registerInput
 
