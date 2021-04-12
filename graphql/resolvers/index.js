@@ -6,6 +6,7 @@ module.exports = {
     ...posts.queries
   },
   Mutation: {
-    ...users.mutations
+    ...users.mutations,
+    ...posts.mutations
   }
 }
