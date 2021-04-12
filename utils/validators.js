@@ -1,4 +1,4 @@
-module.exports = { validateRegisterInput }
+module.exports = { validateRegisterInput, validateLoginInput }
 
 function validateRegisterInput (username, email, password, confirmPass) {
   const errors = {}
@@ -17,6 +17,19 @@ function validateRegisterInput (username, email, password, confirmPass) {
   } else if (password !== confirmPass) {
     errors.confirmPass = 'Passwords must match'
   }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0
+  }
+}
+
+function validateLoginInput (username, password) {
+  const errors = {}
+
+  if (!username.trim()) errors.username = 'Username must not be empty'
+
+  if (!password) errors.password = 'Password must not be empty'
 
   return {
     errors,
