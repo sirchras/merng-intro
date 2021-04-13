@@ -1,5 +1,6 @@
 const posts = require('./posts')
 const users = require('./users')
+const comments = require('./comments')
 
 module.exports = {
   Query: {
@@ -7,6 +8,7 @@ module.exports = {
   },
   Mutation: {
     ...users.mutations,
-    ...posts.mutations
+    ...posts.mutations,
+    ...comments.mutations
   }
 }
