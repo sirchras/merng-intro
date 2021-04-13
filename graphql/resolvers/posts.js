@@ -1,3 +1,4 @@
+const { AuthenticationError } = require('apollo-server-errors')
 const Post = require('../../models/Post')
 const checkAuth = require('../../utils/checkAuth')
 
@@ -11,6 +12,7 @@ module.exports = {
         throw new Error(err)
       }
     },
+
     getPost: async (_, { postId }) => {
       try {
         const post = await Post.findById(postId)
@@ -21,6 +23,7 @@ module.exports = {
       }
     }
   },
+
   mutations: {
     createPost: async (_, { body }, context) => {
       const user = checkAuth(context)
@@ -32,6 +35,22 @@ module.exports = {
       }).save()
 
       return post
+    },
+
+    deletePost: async (_, { postId }, context) => {
+      const user = checkAuth(context)
+
+      try {
+        const post = await Post.findById(postId)
+        if (!post) throw new Error('Post not found')
+
+        if (user.username !== post.username) throw new AuthenticationError('Action not allowed')
+
+        await post.delete()
+        return 'Post deleted'
+      } catch (err) {
+        throw new Error(err)
+      }
     }
   }
 }
