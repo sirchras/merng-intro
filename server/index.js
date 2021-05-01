@@ -6,7 +6,7 @@ const server = require('./server')
 
 dotenv.config({ path: path.join(__dirname, '.env') })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 const {
   DB_HOST: host,
   DB_USER: user,
