@@ -23,11 +23,6 @@ function Nav() {
           active={activeItem === 'register'}
           onClick={handleItemClick}
         />
-        <Menu.Item
-          name='logout'
-          active={activeItem === 'logout'}
-          onClick={handleItemClick}
-        />
       </Menu.Menu>
     </Menu>
   )
