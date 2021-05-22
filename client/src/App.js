@@ -7,10 +7,10 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 
 import 'semantic-ui-css/semantic.min.css'
-import './App.css';
+import './App.css'
 import Nav from './components/Nav'
 
-function App() {
+function App () {
   return (
     <Router>
       <Container>
@@ -20,7 +20,7 @@ function App() {
         <Route path='/register' component={Register}/>
       </Container>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

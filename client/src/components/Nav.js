@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
-function Nav() {
+function Nav () {
   const page = (useLocation().pathname.substring(1) || 'home')
   const [activeItem, setActiveItem] = useState(page)
   const handleItemClick = (e, { name }) => setActiveItem(name)

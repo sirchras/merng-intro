@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Register() {
+function Register () {
   return (
     <h1>register</h1>
   )
