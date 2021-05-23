@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { DateTime } from 'luxon'
 import { Feed, Icon } from 'semantic-ui-react'
 
 function Post ({ post }) {
   const { username, createdAt, body, likeCount } = post
+  const dt = DateTime.fromISO(createdAt).setZone('Pacific/Auckland')
 
   return (
     <Feed.Event>
@@ -11,7 +13,11 @@ function Post ({ post }) {
       <Feed.Content>
         <Feed.Summary
           user={username}
-          date={createdAt}
+          date={
+            DateTime.now().diff(dt).as('days') > 2
+              ? dt.toLocaleString(DateTime.DATETIME_FULL)
+              : dt.toRelative()
+          }
         />
         <Feed.Extra text content={body} />
         <Feed.Meta>
