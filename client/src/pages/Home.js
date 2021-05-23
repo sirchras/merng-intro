@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { Feed, Header } from 'semantic-ui-react'
+import { Comment, Header } from 'semantic-ui-react'
 
 import { FETCH_POSTS_QUERY } from '../api/posts'
 import Post from '../components/Post'
@@ -10,7 +10,12 @@ function Home () {
   const posts = data?.getPosts
 
   return (
-    <Feed size='large'>
+    <Comment.Group
+      size='massive'
+      style={{
+        maxWidth: '100%'
+      }}
+    >
       <Header as='h1' dividing>
         Recent Posts
       </Header>
@@ -24,7 +29,7 @@ function Home () {
               ))
             )
       }
-    </Feed>
+    </Comment.Group>
   )
 }
 
