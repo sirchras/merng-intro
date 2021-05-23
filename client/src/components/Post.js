@@ -5,7 +5,7 @@ import { Feed, Icon } from 'semantic-ui-react'
 
 function Post ({ post }) {
   const { username, createdAt, body, likeCount } = post
-  const dt = DateTime.fromISO(createdAt).setZone('Pacific/Auckland')
+  const dt = DateTime.fromISO(createdAt)
 
   return (
     <Feed.Event>
