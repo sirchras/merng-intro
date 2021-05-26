@@ -16,7 +16,7 @@ function Home () {
         maxWidth: '100%'
       }}
     >
-      <Header as='h1' dividing>
+      <Header as='h1' textAlign='center' dividing>
         Recent Posts
       </Header>
 
