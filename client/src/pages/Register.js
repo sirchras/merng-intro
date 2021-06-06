@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Button, Container, Form, Header, Message } from 'semantic-ui-react'
 
@@ -13,9 +14,12 @@ const defaultFormState = {
 
 function Register () {
   const [form, setForm] = useState(defaultFormState)
+  const history = useHistory()
+
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER, {
-    update (proxy, result) {
+    update (_, result) {
       console.log(result)
+      history.push('/')
     },
     variables: form
   })
@@ -24,11 +28,7 @@ function Register () {
   function onSubmit (evt) {
     evt.preventDefault()
 
-    console.log('form submitted!', form)
     registerUser()
-      .then(() => {
-        console.log('success')
-      })
       .catch(console.error)
   }
 
