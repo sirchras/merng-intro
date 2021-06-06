@@ -14,20 +14,17 @@ function Home () {
       <Header as='h1' textAlign='center' dividing>
         Recent Posts
       </Header>
-      { loading
-        ? (
-            <Loader active inline='centered' />
-          )
-        : (
-            <Comment.Group size='massive' style={{ maxWidth: '100%' }}>
-              {
-                posts.map(post => (
-                  <Post key={post.id} post={post} />
-                ))
-              }
-            </Comment.Group>
-          )
-      }
+      { loading && <Loader active inline='centered' /> }
+      { posts && (
+        <Comment.Group size='massive' style={{ maxWidth: '100%' }}>
+          {
+            posts.map(post => (
+              <Post key={post.id} post={post} />
+            ))
+          }
+        </Comment.Group>
+
+      )}
     </Container>
   )
 }
