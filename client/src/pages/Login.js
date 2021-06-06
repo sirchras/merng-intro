@@ -29,7 +29,7 @@ function Login () {
       </Header>
       <Form
         onSubmit={onSubmit}
-        className={loading && 'loading'}
+        className={loading ? 'loading' : ''}
       >
         <Form.Input
           label='Username'
