@@ -24,11 +24,12 @@ function Register () {
   function onSubmit (evt) {
     evt.preventDefault()
 
-    console.log('form submiitted!', form)
+    console.log('form submitted!', form)
     registerUser()
+      .then(() => {
+        console.log('success')
+      })
       .catch(console.error)
-
-    // setForm(defaultFormState)
   }
 
   function onChange (evt) {
@@ -47,7 +48,7 @@ function Register () {
       </Header>
       <Form
         onSubmit={onSubmit}
-        className={loading ? 'loading' : (error ? 'error' : '')}
+        className={loading && 'loading'}
       >
         <Form.Input
           label='Username'
@@ -56,7 +57,7 @@ function Register () {
           value={form.username}
           error={!!errors?.username}
           onChange={onChange}
-          // required
+          required
         />
         <Form.Input
           label='Email'
@@ -66,7 +67,7 @@ function Register () {
           value={form.email}
           error={!!errors?.email}
           onChange={onChange}
-          // required
+          required
         />
         <Form.Input
           label='Password'
@@ -76,7 +77,7 @@ function Register () {
           value={form.password}
           error={!!errors?.password}
           onChange={onChange}
-          // required
+          required
         />
         <Form.Input
           label='Confirm Password'
@@ -86,7 +87,7 @@ function Register () {
           value={form.confirmPass}
           error={!!errors?.confirmPass}
           onChange={onChange}
-          // required
+          required
         />
         {
           error && (
