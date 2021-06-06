@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { Comment, Header } from 'semantic-ui-react'
+import { Container, Comment, Header, Loader } from 'semantic-ui-react'
 
 import { FETCH_POSTS_QUERY } from '../api/posts'
 import Post from '../components/Post'
@@ -10,26 +10,25 @@ function Home () {
   const posts = data?.getPosts
 
   return (
-    <Comment.Group
-      size='massive'
-      style={{
-        maxWidth: '100%'
-      }}
-    >
+    <Container>
       <Header as='h1' textAlign='center' dividing>
         Recent Posts
       </Header>
-
-      {
-        loading
-          ? <h3>Loading posts...</h3>
-          : (
-              posts.map(post => (
-                <Post key={post.id} post={post} />
-              ))
-            )
+      { loading
+        ? (
+            <Loader active inline='centered' />
+          )
+        : (
+            <Comment.Group size='massive' style={{ maxWidth: '100%' }}>
+              {
+                posts.map(post => (
+                  <Post key={post.id} post={post} />
+                ))
+              }
+            </Comment.Group>
+          )
       }
-    </Comment.Group>
+    </Container>
   )
 }
 
