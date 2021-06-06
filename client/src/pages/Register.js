@@ -22,7 +22,7 @@ function Register () {
     },
     variables: form
   })
-  const { errors } = error?.graphQLErrors[0].extensions.exception
+  const errors = error?.graphQLErrors[0].extensions.exception.errors
 
   return (
     <Container text>
