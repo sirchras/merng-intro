@@ -1,45 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Button, Container, Form, Header, Message } from 'semantic-ui-react'
 
 import { REGISTER_USER } from '../api/auth'
-
-const defaultFormState = {
-  username: '',
-  email: '',
-  password: '',
-  confirmPass: ''
-}
+import useForm from '../hooks/useForm'
 
 function Register () {
-  const [form, setForm] = useState(defaultFormState)
   const history = useHistory()
+
+  const { onChange, onSubmit, form } = useForm(() => registerUser(), {
+    username: '',
+    email: '',
+    password: '',
+    confirmPass: ''
+  })
 
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER, {
     update (_, result) {
-      console.log(result)
       history.push('/')
     },
     variables: form
   })
-  const errors = error?.graphQLErrors[0].extensions.exception.errors
-
-  function onSubmit (evt) {
-    evt.preventDefault()
-
-    registerUser()
-      .catch(console.error)
-  }
-
-  function onChange (evt) {
-    const { name, value } = evt.target
-
-    setForm({
-      ...form,
-      [name]: value
-    })
-  }
+  const { errors } = error?.graphQLErrors[0].extensions.exception
 
   return (
     <Container text>
