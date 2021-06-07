@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Button, Container, Form, Header, Message } from 'semantic-ui-react'
 
 import { REGISTER_USER } from '../api/auth'
+import { AuthContext } from '../components/auth/AuthProvider'
 import useForm from '../hooks/useForm'
 
 function Register () {
+  const context = useContext(AuthContext)
   const history = useHistory()
 
   const { onChange, onSubmit, form } = useForm(() => registerUser(), {
@@ -17,7 +19,8 @@ function Register () {
   })
 
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER, {
-    update (_, result) {
+    update (_, { data: { login: user } }) {
+      context.login(user)
       history.push('/')
     },
     variables: form
@@ -85,7 +88,7 @@ function Register () {
             </Message>
           )
         }
-        <Button primary>
+        <Button color='purple'>
           Register
         </Button>
       </Form>
