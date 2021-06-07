@@ -5,7 +5,6 @@ import { Menu } from 'semantic-ui-react'
 import { AuthContext } from './auth/AuthProvider'
 
 function Nav () {
-  // eslint-disable-next-line no-unused-vars
   const { user, logout } = useContext(AuthContext)
   const page = useLocation().pathname
 
