@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 import { AuthProvider } from './components/auth/AuthProvider'
+import RedirectRoute from './components/auth/RedirectRoute'
 import Nav from './components/Nav'
 
 function App () {
@@ -18,8 +19,8 @@ function App () {
         <Container>
           <Nav />
           <Route exact path='/' component={Home}/>
-          <Route path='/login' component={Login}/>
-          <Route path='/register' component={Register}/>
+          <RedirectRoute path='/login' component={Login}/>
+          <RedirectRoute path='/register' component={Register}/>
         </Container>
       </Router>
     </AuthProvider>
