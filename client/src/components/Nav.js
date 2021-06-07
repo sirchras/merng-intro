@@ -1,36 +1,47 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
+import { AuthContext } from './auth/AuthProvider'
+
 function Nav () {
-  const page = (useLocation().pathname.substring(1) || 'home')
-  const [activeItem, setActiveItem] = useState(page)
-  const handleItemClick = (e, { name }) => setActiveItem(name)
+  // eslint-disable-next-line no-unused-vars
+  const { user, logout } = useContext(AuthContext)
+  const page = useLocation().pathname
+
+  const authed = (
+    <Menu.Item
+      name='logout'
+      onClick={logout}
+      as={Link}
+      // to='/login'
+    />
+  )
+  const unAuthed = (<>
+    <Menu.Item
+      name='login'
+      active={page === '/login'}
+      as={Link}
+      to='/login'
+    />
+    <Menu.Item
+      name='register'
+      active={page === '/register'}
+      as={Link}
+      to='/register'
+    />
+  </>)
 
   return (
     <Menu pointing secondary color='purple'>
       <Menu.Item
-        name='home'
-        active={activeItem === 'home'}
-        onClick={handleItemClick}
+        name={user ? user.username : 'home'}
+        active={page === '/'}
         as={Link}
         to='/'
       />
       <Menu.Menu position='right'>
-        <Menu.Item
-          name='login'
-          active={activeItem === 'login'}
-          onClick={handleItemClick}
-          as={Link}
-          to='/login'
-        />
-        <Menu.Item
-          name='register'
-          active={activeItem === 'register'}
-          onClick={handleItemClick}
-          as={Link}
-          to='/register'
-        />
+        { user ? authed : unAuthed }
       </Menu.Menu>
     </Menu>
   )
