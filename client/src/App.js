@@ -8,18 +8,21 @@ import Register from './pages/Register'
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.css'
+import { AuthProvider } from './components/auth/AuthProvider'
 import Nav from './components/Nav'
 
 function App () {
   return (
-    <Router>
-      <Container>
-        <Nav />
-        <Route exact path='/' component={Home}/>
-        <Route path='/login' component={Login}/>
-        <Route path='/register' component={Register}/>
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Container>
+          <Nav />
+          <Route exact path='/' component={Home}/>
+          <Route path='/login' component={Login}/>
+          <Route path='/register' component={Register}/>
+        </Container>
+      </Router>
+    </AuthProvider>
   )
 }
 
