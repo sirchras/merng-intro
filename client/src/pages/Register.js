@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Button, Container, Form, Header, Message } from 'semantic-ui-react'
 
-import { REGISTER_USER } from '../api/auth'
+import { REGISTER_USER } from '../graphql/auth'
 import { AuthContext } from '../components/auth/AuthProvider'
 import useForm from '../hooks/useForm'
 

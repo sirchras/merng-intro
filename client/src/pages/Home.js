@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/client'
 import { Container, Comment, Header, Loader } from 'semantic-ui-react'
 
-import { FETCH_POSTS_QUERY } from '../api/posts'
+import { FETCH_POSTS_QUERY } from '../graphql/posts'
 import Post from '../components/Post'
 
 function Home () {
