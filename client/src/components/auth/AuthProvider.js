@@ -1,42 +1,16 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const AuthContext = createContext({
-  user: null,
-  login: (user) => {},
-  logout: () => {}
-})
-
-function reducer (state, action) {
-  switch (action.type) {
-    case 'LOGIN':
-      return {
-        ...state,
-        user: action.payload
-      }
-    case 'LOGOUT':
-      return {
-        ...state,
-        user: null
-      }
-    default:
-      return state
-  }
-}
+const AuthContext = createContext()
 
 function AuthProvider ({ children }) {
-  const [state, dispatch] = useReducer(reducer, { user: null })
+  const [user, setUser] = useState(null)
 
-  function login (user) {
-    dispatch({ type: 'LOGIN', payload: user })
-  }
-
-  function logout () {
-    dispatch({ type: 'LOGOUT' })
-  }
+  const login = (user) => setUser(user)
+  const logout = () => setUser(null)
 
   return (
-    <AuthContext.Provider value={{ user: state.user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
