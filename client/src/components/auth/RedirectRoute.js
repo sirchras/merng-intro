@@ -20,7 +20,7 @@ function RedirectRoute ({ component: Component, ...rest }) {
 }
 
 RedirectRoute.propTypes = {
-  component: PropTypes.node.isRequired
+  component: PropTypes.func.isRequired
 }
 
 export default RedirectRoute
