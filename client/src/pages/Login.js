@@ -11,7 +11,7 @@ function Login () {
   const context = useContext(AuthContext)
   const history = useHistory()
 
-  const { onChange, onSubmit, form } = useForm(() => loginUser(), {
+  const { onChange, onSubmit, form } = useForm(() => loginUser().catch(console.error), {
     username: '',
     password: ''
   })
@@ -32,7 +32,7 @@ function Login () {
       </Header>
       <Form
         onSubmit={onSubmit}
-        className={loading ? 'loading' : ''}
+        className={`${error ? 'error' : ''}${loading ? ' loading' : ''}`}
       >
         <Form.Input
           label='Username'

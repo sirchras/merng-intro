@@ -11,7 +11,7 @@ function Register () {
   const context = useContext(AuthContext)
   const history = useHistory()
 
-  const { onChange, onSubmit, form } = useForm(() => registerUser(), {
+  const { onChange, onSubmit, form } = useForm(() => registerUser().catch(console.error), {
     username: '',
     email: '',
     password: '',
@@ -34,7 +34,7 @@ function Register () {
       </Header>
       <Form
         onSubmit={onSubmit}
-        className={loading ? 'loading' : ''}
+        className={`${error ? 'error' : ''}${loading ? ' loading' : ''}`}
       >
         <Form.Input
           label='Username'
