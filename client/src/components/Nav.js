@@ -12,8 +12,6 @@ function Nav () {
     <Menu.Item
       name='logout'
       onClick={logout}
-      as={Link}
-      // to='/login'
     />
   )
   const unAuthed = (<>
