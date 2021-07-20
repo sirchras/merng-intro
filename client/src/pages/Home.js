@@ -27,7 +27,6 @@ function Home () {
             ))
           }
         </Comment.Group>
-
       )}
     </Container>
   )
