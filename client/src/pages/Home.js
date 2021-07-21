@@ -4,7 +4,7 @@ import { Container, Comment, Header, Loader } from 'semantic-ui-react'
 
 import { FETCH_POSTS_QUERY } from '../graphql/posts'
 import { AuthContext } from '../components/auth/AuthProvider'
-import Post from '../components/Post'
+import PostItem from '../components/PostItem'
 import PostForm from '../components/PostForm'
 
 function Home () {
@@ -23,7 +23,7 @@ function Home () {
         <Comment.Group size='massive' style={{ maxWidth: '100%' }}>
           {
             posts.map(post => (
-              <Post key={post.id} post={post} />
+              <PostItem key={post.id} post={post} />
             ))
           }
         </Comment.Group>

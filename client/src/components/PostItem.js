@@ -7,7 +7,7 @@ import { Comment, Icon } from 'semantic-ui-react'
 import { AuthContext } from './auth/AuthProvider'
 import LikeButton from './LikeButton'
 
-function Post ({ post }) {
+function PostItem ({ post }) {
   const { user } = useContext(AuthContext)
   const { id, username, createdAt, body, likes, likeCount, commentCount } = post
   const dt = DateTime.fromISO(createdAt)
@@ -57,8 +57,8 @@ function Post ({ post }) {
   )
 }
 
-Post.propTypes = {
+PostItem.propTypes = {
   post: PropTypes.object
 }
 
-export default Post
+export default PostItem
