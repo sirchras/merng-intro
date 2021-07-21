@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { DateTime } from 'luxon'
 import { Comment, Icon } from 'semantic-ui-react'
 
-function Post ({ post }) {
-  const { id, username, createdAt, body, likeCount, commentCount } = post
-  const dt = DateTime.fromISO(createdAt)
+import { AuthContext } from './auth/AuthProvider'
+import LikeButton from './LikeButton'
 
-  function likePost (evt) {
-    console.log('liked post')
-  }
+function Post ({ post }) {
+  const { user } = useContext(AuthContext)
+  const { id, username, createdAt, body, likes, likeCount, commentCount } = post
+  const dt = DateTime.fromISO(createdAt)
 
   function commentPost (evt) {
     console.log('comment on post')
@@ -34,18 +34,23 @@ function Post ({ post }) {
         </Comment.Metadata>
         <Comment.Text>{ body }</Comment.Text>
         <Comment.Actions>
-          <Comment.Action onClick={likePost}>
-            <Icon name='like' />
-            {
-              `${likeCount} Like${likeCount !== 1 ? 's' : ''}`
-            }
-          </Comment.Action>
+          <LikeButton
+            user={user}
+            post={{ id, likes, likeCount }}
+          />
           <Comment.Action onClick={commentPost}>
             <Icon name='reply' />
             {
               `${commentCount} Comment${commentCount !== 1 ? 's' : ''}`
             }
           </Comment.Action>
+          {
+            (user && user.username === username) && (
+              <Comment.Action onClick={() => { console.log('delete post') }}>
+                <Icon name='trash' />
+              </Comment.Action>
+            )
+          }
         </Comment.Actions>
       </Comment.Content>
     </Comment>
