@@ -15,6 +15,21 @@ const FETCH_POSTS_QUERY = gql`
   }
 `
 
+const FETCH_POST_QUERY = gql`
+  query fetchPost($postId: ID!) {
+    getPost(postId: $postId) {
+      id body createdAt username likeCount
+      likes {
+        username
+      }
+      commentCount
+      comments {
+        id username createdAt body
+      }
+    }
+  }
+`
+
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
@@ -44,6 +59,7 @@ const LIKE_POST_MUTATION = gql`
 
 export {
   FETCH_POSTS_QUERY,
+  FETCH_POST_QUERY,
   CREATE_POST_MUTATION,
   LIKE_POST_MUTATION
 }
