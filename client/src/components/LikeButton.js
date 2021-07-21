@@ -2,14 +2,24 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Comment, Icon } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
+
+import { LIKE_POST_MUTATION } from '../graphql/posts'
 
 function LikeButton ({ user, post: { id, likes, likeCount } }) {
   const history = useHistory()
   const [liked, setLiked] = useState(false)
+  const [likePost] = useMutation(LIKE_POST_MUTATION, {
+    variables: { postId: id }
+  })
 
   useEffect(() => {
-    user && setLiked(!!likes.find(({ username }) => username === user.username))
-    console.log('post liked?', liked)
+    if (!user) {
+      setLiked(false)
+      return
+    }
+
+    setLiked(!!likes.find(({ username }) => username === user.username))
   }, [user, likes])
 
   function onClick (evt) {
@@ -20,12 +30,15 @@ function LikeButton ({ user, post: { id, likes, likeCount } }) {
       return null
     }
 
-    console.log('liked post')
+    likePost().catch(console.error)
   }
 
   return (
     <Comment.Action onClick={onClick}>
-      <Icon name='like' color={liked ? 'red' : ''} />
+      { liked
+        ? <Icon name='like' color='red' />
+        : <Icon name='like' />
+      }
       {
         `${likeCount} Like${likeCount !== 1 ? 's' : ''}`
       }
@@ -34,11 +47,7 @@ function LikeButton ({ user, post: { id, likes, likeCount } }) {
 }
 
 LikeButton.propTypes = {
-  post: {
-    id: PropTypes.string,
-    likes: PropTypes.object,
-    likeCount: PropTypes.number
-  },
+  post: PropTypes.object,
   user: PropTypes.object
 }
 
