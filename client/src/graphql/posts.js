@@ -45,6 +45,12 @@ const CREATE_POST_MUTATION = gql`
   }
 `
 
+const DELETE_POST_MUTATION = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`
+
 const LIKE_POST_MUTATION = gql`
   mutation toggleLikePost($postId: ID!) {
     likePost(postId: $postId) {
@@ -61,5 +67,6 @@ export {
   FETCH_POSTS_QUERY,
   FETCH_POST_QUERY,
   CREATE_POST_MUTATION,
+  DELETE_POST_MUTATION,
   LIKE_POST_MUTATION
 }
