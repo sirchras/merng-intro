@@ -46,7 +46,7 @@ function PostItem ({ post }) {
             }
           </Comment.Action>
           {
-            user?.username === username && <DeleteButton />
+            user?.username === username && <DeleteButton postId={id}/>
           }
         </Comment.Actions>
       </Comment.Content>
