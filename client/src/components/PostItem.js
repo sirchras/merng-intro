@@ -6,6 +6,7 @@ import { Comment, Icon } from 'semantic-ui-react'
 
 import { AuthContext } from './auth/AuthProvider'
 import LikeButton from './LikeButton'
+import DeleteButton from './DeleteButton'
 
 function PostItem ({ post }) {
   const { user } = useContext(AuthContext)
@@ -45,11 +46,7 @@ function PostItem ({ post }) {
             }
           </Comment.Action>
           {
-            (user && user.username === username) && (
-              <Comment.Action onClick={() => { console.log('delete post') }}>
-                <Icon name='trash' />
-              </Comment.Action>
-            )
+            user?.username === username && <DeleteButton />
           }
         </Comment.Actions>
       </Comment.Content>
